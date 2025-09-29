@@ -37,8 +37,8 @@ I'm open to hearing your feedback about the template and what you'd like to see 
 
 The API documentation is available in two formats:
 
-*   **Swagger UI:** [docs.html](./docs.html)
-*   **ReDoc:** [redoc.html](./redoc.html)
+*   **Swagger UI:** [docs.html](https://sha1kh4.github.io/Quiz-app-Api/docs)
+*   **ReDoc:** [redoc.html](https://sha1kh4.github.io/Quiz-app-Api/redoc)
 
 
 Cheers!
