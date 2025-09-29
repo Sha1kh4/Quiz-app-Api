@@ -1,0 +1,270 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "FastAPI", "version": "0.1.0" },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Root",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/create-quiz": {
+      "post": {
+        "tags": ["quiz"],
+        "summary": "Create Quiz",
+        "operationId": "create_quiz_create_quiz_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/QuizCreate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quiz/{quiz_id}": {
+      "get": {
+        "tags": ["quiz"],
+        "summary": "Get Quiz",
+        "operationId": "get_quiz_quiz__quiz_id__get",
+        "parameters": [
+          {
+            "name": "quiz_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Quiz Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quiz/{quiz_id}/question": {
+      "post": {
+        "tags": ["quiz"],
+        "summary": "Create Question",
+        "operationId": "create_question_quiz__quiz_id__question_post",
+        "parameters": [
+          {
+            "name": "quiz_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Quiz Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/QuestionCreate" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quiz/{quiz_id}/answer": {
+      "post": {
+        "tags": ["quiz"],
+        "summary": "Submit Answer",
+        "operationId": "submit_answer_quiz__quiz_id__answer_post",
+        "parameters": [
+          {
+            "name": "quiz_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Quiz Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AnswerSubmit" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quiz/{quiz_id}/questions": {
+      "get": {
+        "tags": ["quiz"],
+        "summary": "Get Quiz Questions",
+        "operationId": "get_quiz_questions_quiz__quiz_id__questions_get",
+        "parameters": [
+          {
+            "name": "quiz_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Quiz Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{user_id}/results": {
+      "get": {
+        "tags": ["users"],
+        "summary": "Get User Results",
+        "operationId": "get_user_results_user__user_id__results_get",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "User Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AnswerSubmit": {
+        "properties": {
+          "question_id": { "type": "integer", "title": "Question Id" },
+          "answer": { "type": "string", "title": "Answer" },
+          "user_id": { "type": "integer", "title": "User Id" }
+        },
+        "type": "object",
+        "required": ["question_id", "answer", "user_id"],
+        "title": "AnswerSubmit"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "QuestionCreate": {
+        "properties": {
+          "question_text": { "type": "string", "title": "Question Text" },
+          "options": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Options"
+          },
+          "correct_answer": { "type": "integer", "title": "Correct Answer" }
+        },
+        "type": "object",
+        "required": ["question_text", "options", "correct_answer"],
+        "title": "QuestionCreate"
+      },
+      "QuizCreate": {
+        "properties": {
+          "title": { "type": "string", "title": "Title" },
+          "description": { "type": "string", "title": "Description" }
+        },
+        "type": "object",
+        "required": ["title", "description"],
+        "title": "QuizCreate"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": { "type": "string", "title": "Message" },
+          "type": { "type": "string", "title": "Error Type" }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

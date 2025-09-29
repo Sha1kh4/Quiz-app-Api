@@ -8,7 +8,7 @@ What's included in the template?
   - Cross-cutting concerns (logging, validation)
 - Infrastructure layer with:
   - Authentication
-  - SQLAlchemy, PostgreSQL (you can change to SQLite for development in database/core.py)
+  - SQLAlchemy with SQLite for local development and PostgreSQL for Docker.
   - Rate limiting on registration
 - Testing projects
   - Pytest unit tests
@@ -23,15 +23,22 @@ I'm open to hearing your feedback about the template and what you'd like to see 
 
 # How to run app. Using Docker with PostgreSQL.
 - Install Docker Desktop
-- Run `docker compose up --build`
+- Run `docker compose up`
 - Run `docker compose down` to stop all services
 
 # How to run locally without postgres or docker.
-- in database/core.py change the DATABASE_URL to sqlite
-- run `uvicorn src.main:app --reload`
+- The project is configured to use SQLite by default for local development.
+- Run `uvicorn src.main:app --reload`
 
 # How to run tests.
 - Run `pytest` to run all tests
+
+# Documentation
+
+The API documentation is available in two formats:
+
+*   **Swagger UI:** [docs.html](./docs.html)
+*   **ReDoc:** [redoc.html](./redoc.html)
 
 
 Cheers!
